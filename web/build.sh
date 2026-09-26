@@ -22,16 +22,18 @@ fi
 cd "$ROOT_DIR"
 echo "Root directory: $(pwd)"
 
-# 2. Check or install Flutter SDK
+# 2. Check or install Flutter SDK (pinned to 3.24.0 for exact compatibility)
 if ! command -v flutter &> /dev/null
 then
-    if [ -d "_flutter/bin" ]; then
+    if [ -x "_flutter/bin/flutter" ] || [ -f "_flutter/bin/flutter" ]; then
         echo "Found cached Flutter SDK in _flutter/bin"
-        export PATH="$PATH:$(pwd)/_flutter/bin"
+        export PATH="$(pwd)/_flutter/bin:$PATH"
+    elif [ -x "$HOME/flutter/bin/flutter" ]; then
+        export PATH="$HOME/flutter/bin:$PATH"
     else
-        echo "Flutter not found. Installing Flutter stable SDK..."
-        git clone https://github.com/flutter/flutter.git --depth 1 -b stable _flutter
-        export PATH="$PATH:$(pwd)/_flutter/bin"
+        echo "Flutter not found. Installing Flutter 3.24.0 SDK..."
+        git clone https://github.com/flutter/flutter.git --depth 1 -b 3.24.0 _flutter
+        export PATH="$(pwd)/_flutter/bin:$PATH"
     fi
 fi
 

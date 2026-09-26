@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "bash -c 'if [ -f build.sh ]; then bash build.sh; elif [ -f web/build.sh ]; then bash web/build.sh; elif [ -f ../build.sh ]; then (cd .. && bash build.sh); else SCRIPT=$(find . -name build.sh 2>/dev/null | head -n 1); if [ -n \"$SCRIPT\" ]; then bash \"$SCRIPT\"; else if ! command -v flutter > /dev/null; then git clone https://github.com/flutter/flutter.git --depth 1 -b stable _flutter && export PATH=\"$PATH:$(pwd)/_flutter/bin\"; fi && flutter config --no-analytics && flutter pub get && flutter build web --release --base-href /; fi; fi'",
+  "buildCommand": "bash -c 'if [ -f build.sh ]; then bash build.sh; elif [ -f web/build.sh ]; then bash web/build.sh; elif [ -f ../build.sh ]; then (cd .. && bash build.sh); else SCRIPT=$(find . -name build.sh 2>/dev/null | head -n 1); if [ -n \"$SCRIPT\" ]; then bash \"$SCRIPT\"; else if ! command -v flutter > /dev/null; then git clone https://github.com/flutter/flutter.git --depth 1 -b 3.24.0 _flutter && export PATH=\"$(pwd)/_flutter/bin:$PATH\"; fi && flutter config --no-analytics && flutter pub get && flutter build web --release --base-href /; fi; fi'",
   "outputDirectory": "build/web",
   "cleanUrls": true,
   "rewrites": [
