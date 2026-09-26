@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "bash -c 'if [ -f build.sh ]; then bash build.sh; elif [ -f ../build.sh ]; then (cd .. && bash build.sh); else flutter build web --release --base-href /; fi'",
+  "buildCommand": "bash build.sh",
   "outputDirectory": "build/web",
   "cleanUrls": true,
   "rewrites": [
